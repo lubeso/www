@@ -1,37 +1,97 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { profile } from "../data/profile";
 ---
 
-<Layout title="www" description="Root static website for www.lubeso.dev">
-  <main>
-    <h1>www</h1>
-    <p>Root static website for www.lubeso.dev</p>
-  </main>
+<Layout
+  title={profile.name}
+  description={`${profile.role} · ${profile.organization}`}
+>
+  <div class="container">
+    <header>
+      <h1>{profile.name}</h1>
+    </header>
+
+    <main>
+      <p class="intro">{profile.intro}</p>
+
+      <h2>Technical Expertise</h2>
+      <ul class="expertise-list">
+        {profile.expertise.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </main>
+
+    <footer>
+      <p>
+        &copy; {new Date().getFullYear()} {profile.name}. This work is licensed under
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>.
+      </p>
+    </footer>
+  </div>
 </Layout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 2rem;
-    max-width: 60ch;
-    text-align: center;
-    min-height: 80vh;
+  .container {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
   }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--text-color);
   }
-  p {
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  .intro {
     font-size: 1.125rem;
-    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+    color: var(--text-color);
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--text-color);
+  }
+
+  .expertise-list {
+    margin: 0 0 2.5rem;
+    padding-left: 1.25rem;
+  }
+
+  .expertise-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+
+  footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    color: var(--muted-color);
+  }
+
+  footer p {
+    margin: 0;
   }
 </style>
